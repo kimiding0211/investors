@@ -8,7 +8,7 @@ $file_status = 1;
 if(!empty($_FILES['file']['name'])){
     $file = $_FILES['file'];
     $fileName_str = explode(".", $file['name']);
-    $fileName = $_POST['years'].$_POST['quarterly'].'.'.$fileName_str[1];
+    $fileName = $_POST['quarterly'].'.'.$fileName_str[1];
     $tmpPath = $file['tmp_name'];
 
      $uploadDir = __DIR__ . '/images/financial_statements/'.$_POST['years'].'/';
