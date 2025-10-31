@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($file_status) {
         $years = $_POST['years'];
         $quarterly = $_POST['quarterly'];
-        $link_url = (!empty($fileName)) ? 'http://localhost/investors/admin/dist/images/financial_statements/'.$quarterly.'/'.$fileName : '';
+        $link_url = (!empty($fileName)) ? 'http://investorst.interserv.com.tw/admin/dist/images/financial_statements/'.$quarterly.'/'.$fileName : '';
 
         $sql = " insert into financial_statements set years='$years', quarterly='$quarterly', link_url='$link_url' ";
         $pdo->query($sql);
