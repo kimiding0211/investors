@@ -86,6 +86,12 @@
                       <p>內部規章與治理機制</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="./internal_audit.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>內部稽核</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -126,6 +132,12 @@
                       <p>股東會</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="./dividend.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>股務作業</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -141,6 +153,12 @@
                     <a href="./sustainability_reports.php" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>永續報告與發展政策</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./stakeholders.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>利害人關係人專區</p>
                     </a>
                   </li>
                 </ul>

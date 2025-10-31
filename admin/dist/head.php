@@ -75,6 +75,10 @@ if($_SESSION['admin_name']==''){
       integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4="
       crossorigin="anonymous"
     />
+    <!-- 編輯器 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	  <<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/47.1.0/ckeditor5.css" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/47.1.0/ckeditor5.umd.js"></script>
   </head>
   <!--end::Head-->
   <!--begin::Body-->
