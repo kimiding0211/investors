@@ -20,7 +20,11 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
     <div class="card-body">
         <input type="id" name="id" class="form-control" hidden="hidden" value="<?php echo $id; ?>"/>
         <div class="mb-3">
-        <label class="form-label">股東會</label>
+        <label class="form-label">年份</label>
+        <input name="years" class="form-control" value="<?php echo $rs[0]['years']; ?>"/>
+        </div>
+        <div class="mb-3">
+        <label class="form-label">名稱</label>
         <input name="name" class="form-control" value="<?php echo $rs[0]['name']; ?>"/>
         </div>
         <div class="mb-3">

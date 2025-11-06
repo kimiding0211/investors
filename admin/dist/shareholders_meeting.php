@@ -25,7 +25,8 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                 <thead>
                 <tr>
                     <th style="width: 10px">id</th>
-                    <th>股東會</th>
+                    <th>年份</th>
+                    <th>名稱</th>
                     <th>時間</th>
                     <th>地點</th>
                     <th></th>
@@ -36,6 +37,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                 <?php for($i=0;$i<count($rs);$i++){ ?>
                 <tr class="align-middle">
                     <td><?php echo $rs[$i]['id']; ?></td>
+                    <td><?php echo $rs[$i]['years']; ?></td>
                     <td><?php echo $rs[$i]['name']; ?></td>
                     <td><?php echo $rs[$i]['date']; ?></td>
                     <td><?php echo $rs[$i]['location']; ?></td>

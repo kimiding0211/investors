@@ -116,6 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($file_status_meeting_notice && $file_status_meeting_procedure_manual && $file_status_major_shareholders && $file_status_annual_report && $file_status_minutes) {
+        $years = $_POST['years'];
         $name = $_POST['name'];
         $date = $_POST['date'];
         $location = $_POST['location'];
@@ -126,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $annual_report = (!empty($fileName_annual_report)) ? "http://investorst.interserv.com.tw/admin/dist/images/shareholders_meeting/$name/".$fileName_annual_report : '';
         $minutes = (!empty($fileName_minutes)) ? "http://investorst.interserv.com.tw/admin/dist/images/shareholders_meeting/$name/".$fileName_minutes : '';
 
-        $sql = " insert into shareholders_meeting set name='$name', date='$date', location='$location', link_video='$link_video',
+        $sql = " insert into shareholders_meeting set years=$years, name='$name', date='$date', location='$location', link_video='$link_video',
                  meeting_notice='$meeting_notice', meeting_procedure_manual='$meeting_procedure_manual', major_shareholders='$major_shareholders', 
                  annual_report='$annual_report', minutes='$minutes' ";
         $pdo->query($sql);
@@ -147,7 +148,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!--begin::Body-->
     <div class="card-body">
         <div class="mb-3">
-        <label class="form-label">股東會</label>
+        <label class="form-label">年份</label>
+        <input name="years" class="form-control"/>
+        </div>
+        <div class="mb-3">
+        <label class="form-label">名稱</label>
         <input name="name" class="form-control"/>
         </div>
         <div class="mb-3">

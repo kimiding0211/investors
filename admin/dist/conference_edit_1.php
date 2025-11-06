@@ -63,7 +63,8 @@ if ($file_status_cn && $file_status_en) {
     $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 
     if(!empty($fileName_cn)){
-        $link_cn = 'http://investorst.interserv.com.tw/admin/dist/images/conference/'.$years.'/'.$fileName_cn;
+        // $link_cn = 'http://investorst.interserv.com.tw/admin/dist/images/conference/'.$years.'/'.$fileName_cn;
+        $link_cn = 'http://localhost/investors/admin/dist/images/conference/'.$years.'/'.$fileName_cn;
     }else{
         if($rs[0]['link_cn']){
             $link_cn = $rs[0]['link_cn'];
@@ -72,7 +73,8 @@ if ($file_status_cn && $file_status_en) {
         }
     }
     if(!empty($fileName_en)){
-        $link_en = 'http://investorst.interserv.com.tw/admin/dist/images/conference/'.$years.'/'.$fileName_en;
+        // $link_en = 'http://investorst.interserv.com.tw/admin/dist/images/conference/'.$years.'/'.$fileName_en;
+        $link_en = 'http://localhost/investors/admin/dist/images/conference/'.$years.'/'.$fileName_en;
     }else{
         if($rs[0]['link_cn']){
             $link_en = $rs[0]['link_en'];

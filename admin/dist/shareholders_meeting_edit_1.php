@@ -117,6 +117,7 @@ if(!empty($_FILES['minutes']['name'])){
 
 if ($file_status_meeting_notice && $file_status_meeting_procedure_manual && $file_status_major_shareholders && $file_status_annual_report && $file_status_minutes) {
     $id = $_POST['id'];
+    $years = $_POST['years'];
     $name = $_POST['name'];
     $date = $_POST['date'];
     $location = $_POST['location'];
@@ -172,7 +173,7 @@ if ($file_status_meeting_notice && $file_status_meeting_procedure_manual && $fil
         }
     }
 
-    $sql = " update shareholders_meeting set name='$name', date='$date', location='$location', link_video='$link_video',
+    $sql = " update shareholders_meeting set years=$years, name='$name', date='$date', location='$location', link_video='$link_video',
              meeting_notice='$meeting_notice', meeting_procedure_manual='$meeting_procedure_manual', major_shareholders='$major_shareholders',
              annual_report='$annual_report', minutes='$minutes'
             where id=$id ";
