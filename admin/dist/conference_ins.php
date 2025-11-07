@@ -56,8 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $date = $_POST['date'];
         $location = $_POST['location'];
         $link_video = $_POST['link_video'];
-        $link_cn = (!empty($fileName_cn)) ? 'http://investorst.interserv.com.tw/admin/dist/images/conference/'.$years.'/'.$fileName_cn : '';
-        $link_en = (!empty($fileName_en)) ? 'http://investorst.interserv.com.tw/admin/dist/images/conference/'.$years.'/'.$fileName_en : '';
+        $link_cn = (!empty($fileName_cn)) ? 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/conference/'.$years.'/'.$fileName_cn : '';
+        $link_en = (!empty($fileName_en)) ? 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/conference/'.$years.'/'.$fileName_en : '';
 
         $sql = " insert into conference set years='$years', date='$date', location='$location', link_video='$link_video', link_cn='$link_cn', link_en='$link_en' ";
         $pdo->query($sql);

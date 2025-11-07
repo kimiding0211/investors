@@ -128,7 +128,7 @@ if ($file_status_meeting_notice && $file_status_meeting_procedure_manual && $fil
     $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 
     if(!empty($fileName_meeting_notice)){
-        $meeting_notice = "http://investorst.interserv.com.tw/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_notice;
+        $meeting_notice = "http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_notice;
     }else{
         if($rs[0]['meeting_notice']){
             $meeting_notice = $rs[0]['meeting_notice'];
@@ -137,7 +137,7 @@ if ($file_status_meeting_notice && $file_status_meeting_procedure_manual && $fil
         }
     }
     if(!empty($fileName_meeting_procedure_manual)){
-        $meeting_procedure_manual = "http://investorst.interserv.com.tw/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_procedure_manual;
+        $meeting_procedure_manual = "http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_procedure_manual;
     }else{
         if($rs[0]['meeting_meeting_procedure_manualnotice']){
             $meeting_procedure_manual = $rs[0]['meeting_procedure_manual'];
@@ -146,7 +146,7 @@ if ($file_status_meeting_notice && $file_status_meeting_procedure_manual && $fil
         }
     }
     if(!empty($fileName_major_shareholders)){
-        $major_shareholders = "http://investorst.interserv.com.tw/admin/dist/images/shareholders_meeting/$name/".$fileName_major_shareholders;
+        $major_shareholders = "http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/shareholders_meeting/$name/".$fileName_major_shareholders;
     }else{
         if($rs[0]['major_shareholders']){
             $major_shareholders = $rs[0]['major_shareholders'];
@@ -155,7 +155,7 @@ if ($file_status_meeting_notice && $file_status_meeting_procedure_manual && $fil
         }
     }
     if(!empty($fileName_annual_report)){
-        $annual_report = "http://investorst.interserv.com.tw/admin/dist/images/shareholders_meeting/$name/".$fileName_annual_report;
+        $annual_report = "http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/shareholders_meeting/$name/".$fileName_annual_report;
     }else{
         if($rs[0]['annual_report']){
             $annual_report = $rs[0]['annual_report'];
@@ -164,7 +164,7 @@ if ($file_status_meeting_notice && $file_status_meeting_procedure_manual && $fil
         }
     }
     if(!empty($fileName_minutes)){
-        $minutes = "http://investorst.interserv.com.tw/admin/dist/images/shareholders_meeting/$name/".$fileName_minutes;
+        $minutes = "http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/shareholders_meeting/$name/".$fileName_minutes;
     }else{
         if($rs[0]['minutes']){
             $minutes = $rs[0]['minutes'];

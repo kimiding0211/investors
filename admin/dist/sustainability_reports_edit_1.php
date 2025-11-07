@@ -36,7 +36,7 @@ if ($file_status) {
     $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 
     if(!empty($fileName)){
-        $link_url = 'http://investorst.interserv.com.tw/admin/dist/images/sustainability_reports/'.$fileName;
+        $link_url = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/sustainability_reports/'.$fileName;
     }else{
         if($rs[0]['link_url']){
             $link_url = $rs[0]['link_url'];

@@ -121,11 +121,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $date = $_POST['date'];
         $location = $_POST['location'];
         $link_video = $_POST['link_video'];
-        $meeting_notice = (!empty($fileName_meeting_notice)) ? "http://investorst.interserv.com.tw/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_notice : '';
-        $meeting_procedure_manual = (!empty($fileName_meeting_procedure_manual)) ? "http://investorst.interserv.com.tw/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_procedure_manual : '';
-        $major_shareholders = (!empty($fileName_major_shareholders)) ? "http://investorst.interserv.com.tw/admin/dist/images/shareholders_meeting/$name/".$fileName_major_shareholders : '';
-        $annual_report = (!empty($fileName_annual_report)) ? "http://investorst.interserv.com.tw/admin/dist/images/shareholders_meeting/$name/".$fileName_annual_report : '';
-        $minutes = (!empty($fileName_minutes)) ? "http://investorst.interserv.com.tw/admin/dist/images/shareholders_meeting/$name/".$fileName_minutes : '';
+        $meeting_notice = (!empty($fileName_meeting_notice)) ? "http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_notice : '';
+        $meeting_procedure_manual = (!empty($fileName_meeting_procedure_manual)) ? "http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_procedure_manual : '';
+        $major_shareholders = (!empty($fileName_major_shareholders)) ? "http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/shareholders_meeting/$name/".$fileName_major_shareholders : '';
+        $annual_report = (!empty($fileName_annual_report)) ? "http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/shareholders_meeting/$name/".$fileName_annual_report : '';
+        $minutes = (!empty($fileName_minutes)) ? "http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/shareholders_meeting/$name/".$fileName_minutes : '';
 
         $sql = " insert into shareholders_meeting set years=$years, name='$name', date='$date', location='$location', link_video='$link_video',
                  meeting_notice='$meeting_notice', meeting_procedure_manual='$meeting_procedure_manual', major_shareholders='$major_shareholders', 
