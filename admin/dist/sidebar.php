@@ -156,6 +156,12 @@
                     </a>
                   </li>
                   <li class="nav-item">
+                    <a href="./environmental_sustainability.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>環境永續性和社會繁榮</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
                     <a href="./stakeholders.php" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>利害人關係人專區</p>
