@@ -11,7 +11,7 @@ $rs_project_name = $result->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>昱泉國際投資人 內部規章與治理機制</title>
+    <title>昱泉國際投資人 永續報告書與發展政策</title>
     <meta name="description" content="昱泉國際投資人官網">
     <link rel="icon" href="../images/logo_simple.png" type="image/x-icon">
 
