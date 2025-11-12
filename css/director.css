@@ -1,0 +1,168 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
+
+
+
+
+/* 左邊選單 */
+.nav {
+    /* width: 80%;
+    max-width: 80%; */
+    background-color: rgba(20, 62, 104, 0.992);
+    margin: 0 5%;
+    flex: 0 0 25%;
+    /* 固定占 25% 寬度 */
+    max-width: 25%;
+
+}
+
+/* .nav .nav-item {
+    margin: 2%;
+} */
+
+.left-nav.nav .nav-item:hover {
+    background-color: #446587;
+}
+
+.left-nav .nav-item a {
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5% 0;
+}
+
+.left-nav .nav-item a:hover {
+    color: #FFF;
+}
+
+.left-nav .nav-item a svg {
+    width: 25px;
+    fill: #fff;
+}
+
+
+
+
+/* 下拉選單 */
+.card-box .dropdown button {
+    /* border: 1px solid #000; */
+    /* border-radius: 5%; */
+    width: 100%;
+    /* margin-left: auto; */
+    text-align: left;
+}
+
+.card-box .dropdown-menu {
+    width: 100%;
+}
+
+.card-box .card {
+    width: 100%;
+    /* 或 max-width: 1200px */
+    min-width: 0;
+    /* 防止 table 撐爆 */
+}
+
+.card-box .card h5 {
+    font-size: 20px;
+    color: rgb(0, 0, 255);
+    font-weight: 800;
+}
+
+.card-box .card span {
+    font-weight: 600;
+}
+
+.card-box .card-bg {
+    background-color: #164069;
+    color: #fff;
+    text-align: center;
+}
+
+.card-box .card-content {
+    overflow: auto;
+}
+
+.card-box .card table {
+    table-layout: fixed;
+    /* 固定欄位寬度，不隨內容自動調整 */
+    width: 100%;
+}
+
+.card-box table thead tr {
+    background-color: #446587;
+    border: none;
+    color: #FFF;
+    font-size: 20px;
+    line-height: 3rem;
+}
+
+.w150 {
+    width: 150px;
+}
+
+.w200 {
+    width: 200px;
+}
+
+.full {
+    width: 100%;
+}
+
+.w80 {
+    width: 80%;
+}
+
+.w65 {
+    width: 65%;
+}
+
+.card-btn {
+    min-width: 64px;
+    color: #164069;
+    border-color: #143e6869;
+    text-decoration: none;
+}
+
+.card-btn:hover {
+    /* color: #fff; */
+    /* background-color: #143E68; */
+    border-color: #164069;
+}
+
+.purple {
+    color: white;
+    background-color: purple;
+    font-size: 20px;
+}
+
+.modal-dialog {
+    max-width: 60%;
+    /* margin: 1.75rem auto; */
+}
+
+.table>thead {
+    vertical-align: bottom;
+    text-align: center;
+}
+
+.table>:not(caption)>*>* {
+    text-align: center;
+}
+
+/* .table tbody tr td:last-child {
+    text-align: left !important;
+} */

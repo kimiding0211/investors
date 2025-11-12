@@ -1,0 +1,72 @@
+* {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
+
+.card-header {
+    -webkit-writing-mode: vertical-lr;
+    writing-mode: vertical-lr;
+    border-radius: 5%;
+}
+
+.card-btn {
+    min-width: 64px;
+    color: #164069;
+    border-color: #143e6869;
+    text-decoration: none;
+}
+
+.card-btn:hover {
+    /* color: #fff; */
+    /* background-color: #143E68; */
+    border-color: #164069;
+}
+
+.card-bg {
+    background-color: #164069;
+    color: #fff;
+    text-align: center;
+}
+
+.line {
+    width: 2px;
+    /* 線寬 */
+    height: 100%;
+    height: 170px;
+    background-color: #143E68;
+    display: inline-block;
+}
+
+.btn-box {
+    padding: 2% 5%;
+}
+
+.borderR {
+    border-right: 1px solid #143E68;
+    /* border-color: #143E68; */
+}
+
+.modal-dialog {
+    max-width: 60%;
+    /* margin: 1.75rem auto; */
+}
+
+
+/* .table>thead {
+    vertical-align: bottom;
+    text-align: center;
+} */

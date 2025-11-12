@@ -1,0 +1,13 @@
+.full {
+    width: 100%;
+}
+
+.card {
+    margin-top: 2%;
+}
+
+.card-bg {
+    background-color: #164069;
+    color: #fff;
+    text-align: center;
+}
