@@ -42,6 +42,9 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                         <a href="conference_edit.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
                             <button class="btn btn-primary" name="save">編輯</button>
                         </a>
+                        <a href="conference_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
+                            <button class="btn btn-primary" name="save">刪除</button>
+                        </a>
                         <?php if(!empty($rs[$i]['link_cn'])){ ?>
                         <a href='<?php echo $rs[$i]['link_cn']; ?>' target='_blank'>檔案預覽(中)</a>
                         <?php } ?>

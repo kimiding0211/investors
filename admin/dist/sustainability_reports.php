@@ -13,11 +13,11 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
         <div class="card mb-4">
             <div class="card-header">
                 <h3 class="card-title">永續發展-永續報告與發展政策</h3>
-                <!-- <div class="text-end">
-                    <a href="audit_ins.php" class="btn">
+                <div class="text-end">
+                    <a href="sustainability_reports_ins.php" class="btn">
                         <button type="submit" class="btn btn-primary" name="save" value="create">新增</button>
                     </a>
-                </div> -->
+                </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -39,6 +39,9 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                     <td>
                         <a href="sustainability_reports_edit.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
                             <button class="btn btn-primary" name="save">編輯</button>
+                        </a>
+                        <a href="sustainability_reports_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
+                            <button class="btn btn-primary" name="save">刪除</button>
                         </a>
                         <?php if(isset($rs[$i]['link_url'])){ ?>
                         <a href='<?php echo $rs[$i]['link_url']; ?>' target='_blank'>檔案預覽</a>

@@ -10,9 +10,10 @@ $identity = $_POST['identity'];
 $name = $_POST['name'];
 $main_experience = $_POST['main_experience'];
 $election_date = $_POST['election_date'];
+$sort = $_POST['sort'];
 
 
-$sql = " update remuneration set years=$years, identity='$identity', name='$name', main_experience='$main_experience', election_date='$election_date'
+$sql = " update remuneration set years=$years, identity='$identity', name='$name', main_experience='$main_experience', election_date='$election_date', sort=$sort
          where id=$id ";
 
 $pdo->query($sql);

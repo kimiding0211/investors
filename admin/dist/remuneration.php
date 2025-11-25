@@ -40,9 +40,13 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $rs[$i]['identity']; ?></td>
                     <td><?php echo $rs[$i]['name']; ?></td>
                     <td><?php echo $rs[$i]['election_date']; ?></td>
+                    <td><?php echo $rs[$i]['sort']; ?></td>
                     <td>
                         <a href="remuneration_edit.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
                             <button class="btn btn-primary" name="save">編輯</button>
+                        </a>
+                        <a href="remuneration_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
+                            <button class="btn btn-primary" name="save">刪除</button>
                         </a>
                     </td>
                     

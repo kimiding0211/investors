@@ -67,27 +67,29 @@ $rs_years = $result->fetchAll(PDO::FETCH_ASSOC);
                     選擇屆數
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#" data-target='#card1'>第4屆審計委員會成員</a></li>
-                    <li><a class="dropdown-item" href="#" data-target='#card2'>第3屆審計委員會成員</a></li>
+                    <?php for($i=0;$i<count($rs_years);$i++){  ?>
+                    <li><a class="dropdown-item" href="#" data-target='#card<?php echo $i+1; ?>'>第<?php echo $rs_years[$i]['years'] ?>屆審計委員會成員</a></li>
+                    <?php } ?>
+                    <!-- <li><a class="dropdown-item" href="#" data-target='#card2'>第3屆審計委員會成員</a></li> -->
                     <!-- <li><a class="dropdown-item" href="#" data-target='#card3'>第12屆董事會</a></li> -->
                 </ul>
             </div>
 
             <div class="card shadow-sm" style="width: 100%;">
                 <div class="card-body">
-                    <p>審計委員會之運作，以下列事項之監督為主要目的：</p>
-                    <p><span>一、公司財務報表之允當表達。</span></p>
-                    <p><span>二、簽證會計師之選（解）任及獨立性與績效。</span></p>
-                    <p><span>三、公司內部控制之有效實施。</span></p>
-                    <p><span>四、公司遵循相關法令及規則。</span></p>
-                    <p><span>五、公司存在或潛在風險之管控。</span></p>
+                    <?php
+                    $sql = " SELECT * FROM audit_content ";
+                    $result = $pdo->query($sql);
+                    $rs = $result->fetchAll(PDO::FETCH_ASSOC);
+                    echo $rs[0]['content'];
+                    ?>
                 </div>
             </div>
 
             <!-- 董事會 -->
             <div class="card shadow-sm my-3">
                 <?php for($i=0;$i<count($rs_years);$i++){
-                    $sql = " SELECT * FROM audit WHERE years=".$rs_years[$i]['years'];
+                    $sql = " SELECT * FROM audit WHERE years=".$rs_years[$i]['years']." order by sort";
                     $result = $pdo->query($sql);
                     $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                 ?>

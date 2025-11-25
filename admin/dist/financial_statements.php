@@ -40,6 +40,9 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                         <a href="financial_statements_edit.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
                             <button class="btn btn-primary" name="save">編輯</button>
                         </a>
+                        <a href="financial_statements_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
+                            <button class="btn btn-primary" name="save">刪除</button>
+                        </a>
                         <?php if(isset($rs[$i]['link_url'])){ ?>
                         <a href='<?php echo $rs[$i]['link_url']; ?>' target='_blank'>檔案預覽</a>
                         <?php } ?>

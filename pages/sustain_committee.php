@@ -66,29 +66,27 @@ $rs_years = $result->fetchAll(PDO::FETCH_ASSOC);
                     選擇屆數
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#" data-target='#card1'>第1屆永續發展委員會成員
-                        </a></li>
-                    <li><a class="dropdown-item" href="#" data-target='#card2'>第1屆永續發展委員會成員
-                        </a></li>
+                    <?php for($i=0;$i<count($rs_years);$i++){  ?>
+                    <li><a class="dropdown-item" href="#" data-target='#card<?php echo $i+1; ?>'>第<?php echo $rs_years[$i]['years'] ?>屆永續發展委員會成員</a></li>
+                    <?php } ?>
+                    <!-- <li><a class="dropdown-item" href="#" data-target='#card2'>第1屆永續發展委員會成員</a></li> -->
                 </ul>
             </div>
 
             <div class="card shadow-sm" style="width: 100%;">
                 <div class="card-body">
-                    <p>本委員會秉於董事會之授權，為協助董事會持續推動企業永續發展與提升公司治理，以實踐永續經營之目的，應以善良管理人之注意，忠實履行下列職權，並提報董事會：</p>
-
-                    <p><span>一、制定、推動及強化公司永續發展政策、年度計畫及策略等。</span></p>
-                    <p><span>二、檢討、追蹤與修訂永續發展執行情形與成效。</span></p>
-                    <p><span>三、督導永續資訊揭露事項並審議永續報告書。</span></p>
-                    <p><span>四、督導本公司永續發展守則之業務或其他經董事會決議之永續發展相關工作之執行。</span></p>
-
-                    <div class="mx-auto w65"><img class="full" src="/images/永續發展委員會.png" alt=""></div>
+                    <?php
+                    $sql = " SELECT * FROM sustain_committee_content ";
+                    $result = $pdo->query($sql);
+                    $rs = $result->fetchAll(PDO::FETCH_ASSOC);
+                    echo $rs[0]['content'];
+                    ?>
                 </div>
             </div>
             <!-- 董事會 -->
             <div class="card shadow-sm my-3">
                 <?php for($i=0;$i<count($rs_years);$i++){
-                    $sql = " SELECT * FROM sustain_committee WHERE years=".$rs_years[$i]['years'];
+                    $sql = " SELECT * FROM sustain_committee WHERE years=".$rs_years[$i]['years']." order by sort";
                     $result = $pdo->query($sql);
                     $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                 ?>

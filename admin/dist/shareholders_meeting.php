@@ -62,6 +62,9 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                         <a href="shareholders_meeting_edit.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
                             <button class="btn btn-primary" name="save">編輯</button>
                         </a>
+                        <a href="shareholders_meeting_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
+                            <button class="btn btn-primary" name="save">刪除</button>
+                        </a>
                     </td>
                     
                 </tr>

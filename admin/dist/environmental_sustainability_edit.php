@@ -52,28 +52,24 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 require 'footer.php';
 ?>
 <script>
-    const {
-        ClassicEditor,
-        Essentials,
-        Paragraph,
-        Bold,
-        Italic,
-        Font
-    } = CKEDITOR;
-
-    ClassicEditor
-        .create( document.querySelector( '#editor' ), {
-            licenseKey: 'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NjMxNjQ3OTksImp0aSI6IjRmZGRhZDljLTM1ZTgtNDk3NS1iNTFjLWQ3ZTNjZjUzNDQyMSIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6Ijk0NmY5YWI3In0.GxaMNLj8v_8GhEgU93Dy6nDXnnZkYcYHPyoKceSXhvEFBl-nQXNgmP17q5Xmsky886m3-YefRe8qSPoveBp8cA',
-            plugins: [ Essentials, Paragraph, Bold, Italic, Font ],
-            toolbar: [
-                'undo', 'redo', '|', 'bold', 'italic', '|',
-                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
-            ]
-        } )
-        .then( editor => {
-            window.editor = editor;
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
+	$('#editor').trumbowyg({
+        btns: [
+            ['viewHTML'],
+            ['fontsize'],
+            ['strong', 'em', 'del', 'underline'],
+            ['link', 'upload'],
+            ['justifyLeft', 'justifyCenter', 'justifyRight'],
+            ['unorderedList', 'orderedList'],
+            ['horizontalRule'],
+            ['foreColor', 'backColor'],
+            // ['table'],
+        ],
+        plugins: {
+            upload: {
+                serverPath: 'upload.php', // 你自己的圖片上傳 API
+                fileFieldName: 'upload',
+                urlPropertyName: 'url' // upload.php 回傳 JSON 裡的圖片網址 key
+            }
+        }
+    });
 </script>

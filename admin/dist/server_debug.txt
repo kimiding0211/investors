@@ -1,0 +1,12 @@
+Array
+(
+    [upload] => Array
+        (
+            [name] => KV_投資人_KV_1600x644.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php157.tmp
+            [error] => 0
+            [size] => 1085505
+        )
+
+)

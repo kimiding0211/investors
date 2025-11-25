@@ -8,11 +8,10 @@ require 'web_config.php';
 
 // 檢查是否有送出表單
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $file_status_cn = 1;
-    $file_status_en = 1;
+    $file_status = 1;
 
-    if(!empty($_FILES['file_cn']['name'])){
-        $file = $_FILES['file_cn'];
+    if(!empty($_FILES['file']['name'])){
+        $file = $_FILES['file'];
         $fileName_str = explode(".", $file['name']);
         $fileName = $_POST['quarterly'].'.'.$fileName_str[1];
         $tmpPath = $file['tmp_name'];
@@ -25,16 +24,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if (move_uploaded_file($file['tmp_name'], $destination)) {
-            $file_status_cn = 1;
+            $file_status = 1;
         }else{
-            $file_status_cn = 0;
+            $file_status = 0;
         }
     }
 
     if ($file_status) {
         $years = $_POST['years'];
         $quarterly = $_POST['quarterly'];
-        $link_url = (!empty($fileName)) ? 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/financial_statements/'.$quarterly.'/'.$fileName : '';
+        $link_url = (!empty($fileName)) ? 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/financial_statements/'.$years.'/'.$fileName : '';
 
         $sql = " insert into financial_statements set years='$years', quarterly='$quarterly', link_url='$link_url' ";
         $pdo->query($sql);

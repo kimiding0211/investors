@@ -4,7 +4,7 @@ require 'sidebar.php';
 require 'web_config.php';
 
 $id = $_GET['id'];
-$sql = " select * from ausustain_committeedit where id=$id ";
+$sql = " select * from sustain_committee where id=$id ";
 $result = $pdo->query($sql);
 $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -33,11 +33,15 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="mb-3">
         <label  class="form-label">主要經(學)歷</label>
-        <input name="main_experience" class="form-control" value="<?php echo $rs[0]['main_experience']; ?>"/>
+        <textarea id="editor" name="main_experience"><?php echo $rs[0]['main_experience']; ?></textarea>
         </div>
         <div class="mb-3">
         <label  class="form-label">選任日期</label>
         <input name="election_date" class="form-control" value="<?php echo $rs[0]['election_date']; ?>"/>
+        </div>
+        <div class="mb-3">
+        <label  class="form-label">排序</label>
+        <input name="sort" class="form-control" value="<?php echo $rs[0]['sort']; ?>"/>
         </div>
         <!-- <div class="input-group mb-3">
         <input type="file" class="form-control" id="inputGroupFile02" />
@@ -63,3 +67,25 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 <?php
 require 'footer.php';
 ?>
+<script>
+	$('#editor').trumbowyg({
+        btns: [
+            ['viewHTML'],
+            ['fontsize'],
+            ['strong', 'em', 'del', 'underline'],
+            ['link', 'upload'],
+            ['justifyLeft', 'justifyCenter', 'justifyRight'],
+            ['unorderedList', 'orderedList'],
+            ['horizontalRule'],
+            ['foreColor', 'backColor'],
+            // ['table'],
+        ],
+        plugins: {
+            upload: {
+                serverPath: 'upload.php', // 你自己的圖片上傳 API
+                fileFieldName: 'upload',
+                urlPropertyName: 'url' // upload.php 回傳 JSON 裡的圖片網址 key
+            }
+        }
+    });
+</script>

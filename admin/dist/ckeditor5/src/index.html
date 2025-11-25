@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CKEditor5 Custom Build — test</title>
+  <style>
+    #editor { min-height: 300px; border: 1px solid #ddd; padding: 8px; }
+  </style>
+</head>
+<body>
+  <h3>Custom CKEditor5 build (self-hosted)</h3>
+  <div id="editor">Type here...</div>
+  <script src="../build/ckeditor.js"></script>
+  <script>
+    const ClassicEditor = window.ClassicEditorBuild ? window.ClassicEditorBuild.default : null;
+    if (!ClassicEditor) {
+      console.error('Built editor not found');
+    } else {
+      ClassicEditor.create(document.querySelector('#editor'), {
+        // Add licenseKey here if you have premium plugins
+      }).then(editor => {
+        editor.plugins.get('FileRepository').createUploadAdapter = loader => {
+          return {
+            upload() {
+              return loader.file.then(file => new Promise((resolve, reject) => {
+                const fd = new FormData();
+                fd.append('upload', file);
+                fetch('upload.php', { method: 'POST', body: fd })
+                  .then(r => r.json())
+                  .then(json => {
+                    if (json.url) resolve({ default: json.url });
+                    else reject(json.error || 'Upload error');
+                  })
+                  .catch(e => reject(e));
+              }));
+            },
+            abort() {}
+          };
+        };
+        window._editor = editor;
+      }).catch(err => console.error(err));
+    }
+  </script>
+</body>
+</html>

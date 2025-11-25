@@ -67,28 +67,29 @@ $rs_years = $result->fetchAll(PDO::FETCH_ASSOC);
                     選擇屆數
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#" data-target='#card1'>第7屆薪酬委員會成員
-                        </a></li>
-                    <li><a class="dropdown-item" href="#" data-target='#card2'>第6屆薪酬委員會成員
-                        </a></li>
+                    <?php for($i=0;$i<count($rs_years);$i++){  ?>
+                    <li><a class="dropdown-item" href="#" data-target='#card<?php echo $i+1; ?>'>第<?php echo $rs_years[$i]['years'] ?>屆薪酬委員會成員</a></li>
+                     <?php } ?>
+                    <!-- <li><a class="dropdown-item" href="#" data-target='#card2'>第6屆薪酬委員會成員</a></li> -->
                     <!-- <li><a class="dropdown-item" href="#" data-target='#card3'>第12屆董事會</a></li> -->
                 </ul>
             </div>
 
             <div class="card shadow-sm" style="width: 100%;">
                 <div class="card-body">
-                    <p>薪酬委員會之運作，以下列事項之監督為主要目的：</p>
-                    <p><span>一、定期檢討本規程並提出修正建議。</span></p>
-                    <p><span>二、訂定並定期檢討董事及經理人績效評估標準、年度及長期之績效目標，與薪資報酬之政策、制度、標準與結構，並於年報中揭露績效評估標準之內容。</span></p>
-                    <p><span>三、定期評估董事及經理人之績效目標達成情形，並依據績效評估標準所得之評估結果，訂定其個別薪資報酬之內容及數額。年報中應揭露董事及經理人之個別績效評估結果，及個別薪資報酬之內容及數額與績效評估結果之關聯性及合理性，並於股東會報告。</span>
-                    </p>
+                    <?php
+                    $sql = " SELECT * FROM remuneration_content ";
+                    $result = $pdo->query($sql);
+                    $rs = $result->fetchAll(PDO::FETCH_ASSOC);
+                    echo $rs[0]['content'];
+                    ?>
                 </div>
             </div>
 
             <!-- 董事會 -->
             <div class="card shadow-sm my-3">
                 <?php for($i=0;$i<count($rs_years);$i++){
-                    $sql = " SELECT * FROM remuneration WHERE years=".$rs_years[$i]['years'];
+                    $sql = " SELECT * FROM remuneration WHERE years=".$rs_years[$i]['years']." order by sort";
                     $result = $pdo->query($sql);
                     $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                 ?>

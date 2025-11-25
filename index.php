@@ -40,14 +40,21 @@ require 'web_config.php';
             <div class="col-12 col-md-12 col-lg-12">
                 <div id="carouselExampleControls" class="carousel slide my-3" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
+                        <?php
+                        $sql = " SELECT * FROM banner order by sort ";
+                        $result = $pdo->query($sql);
+                        $rs = $result->fetchAll(PDO::FETCH_ASSOC);
+                        for($i=0;$i<count($rs);$i++){
+                        ?>
+                        <div class="carousel-item <?php if($i==0){echo 'active';} ?>">
+                            <img src="<?php echo $rs[$i]['link_url']; ?>" class="d-block w-100" alt="...">
+                        </div>
+                        <?php } ?>
+                        <!-- <div class="carousel-item active">
                             <img src="./images/G9_1600x644.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
                             <img src="./images/BH_1600x644.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <!-- <div class="carousel-item">
-                            <img src="..." class="d-block w-100" alt="...">
                         </div> -->
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -114,7 +121,7 @@ require 'web_config.php';
                         <table class="table">
                             <tbody>
                                 <?php
-                                $sql = " SELECT * FROM company_regulations LIMIT 3 ";
+                                $sql = " SELECT * FROM company_regulations where project_name='內部規章' LIMIT 3 ";
                                 $result = $pdo->query($sql);
                                 $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                                 for($i=0;$i<count($rs);$i++){
@@ -300,12 +307,10 @@ require 'web_config.php';
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-
-                            <div class="ratio ratio-16x9">
-                                <video src="<?php echo $rs_conference[0]['link_video']; ?>" title="Video"
-                                    controls=""
-                                    style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border-radius: 4px;"></video>
-                            </div>
+                            <iframe width="100%" height="536" src="<?php echo $rs_conference[0]['link_video']; ?>"
+                                title="法說會" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
 
                         <div class="modal-footer">

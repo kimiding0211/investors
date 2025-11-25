@@ -61,7 +61,18 @@ $rs_project_name = $result->fetchAll(PDO::FETCH_ASSOC);
         </ul>
         <div class="card-box">
             <!-- 下拉選單 -->
-            
+            <div class="dropdown rounded-1 border border-secondary my-2 d-lg-none">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    選擇
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <?php for($i=0;$i<count($rs_project_name);$i++){  ?>
+                    <li><a class="dropdown-item" href="#" data-target='#card<?php echo $i+1; ?>'><?php echo $rs_project_name[$i]['project_name'] ?></a></li>
+                    <?php } ?>
+                </ul>
+            </div>
+
             <!-- 董事會 -->
             <div class="card shadow-sm my-3">
                 <?php for($i=0;$i<count($rs_project_name);$i++){

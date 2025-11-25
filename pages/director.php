@@ -68,32 +68,22 @@ $rs_years = $result->fetchAll(PDO::FETCH_ASSOC);
                     選擇屆數
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#" data-target='#card1'>第14屆董事會</a></li>
-                    <li><a class="dropdown-item" href="#" data-target='#card2'>第13屆董事會</a></li>
-                    <li><a class="dropdown-item" href="#" data-target='#card3'>第12屆董事會</a></li>
+                    <?php for($i=0;$i<count($rs_years);$i++){  ?>
+                    <li><a class="dropdown-item" href="#" data-target='#card<?php echo $i+1; ?>'>第<?php echo $rs_years[$i]['years'] ?>屆董事會</a></li>
+                    <?php } ?>
+                    <!-- <li><a class="dropdown-item" href="#" data-target='#card2'>第13屆董事會</a></li>
+                    <li><a class="dropdown-item" href="#" data-target='#card3'>第12屆董事會</a></li> -->
                 </ul>
             </div>
 
             <div class="card shadow-sm" style="width: 100%;">
                 <div class="card-body">
-                    <h5>一、 董事會職責：</h5>
-                    <span>(一) 本公司之營運計畫。</span><br>
-                    <span>(二) 年度財務報告及半年度財務報告。但半年度財務報告依法令規定無須經會計師查核簽證者，不在此限。</span><br>
-                    <span>(三) 依證券交易法（下稱證交法）第十四條之一規定訂定或修正內部控制制度，及內部控制制度有效性之考核。</span><br>
-                    <span>(四) 依證交法第三十六條之一規定訂定或修正取得或處分資產、從事衍生性商品交易、資金貸與他人、為他人背書或提供保證之重大財務業務行為之處理程序。</span><br>
-                    <span>(五) 募集、發行或私募具有股權性質之有價證券。</span><br>
-                    <span>(六) 董事會未設常務董事者，董事長之選任或解任。</span><br>
-                    <span>(七) 財務、會計或內部稽核主管之任免。</span><br>
-                    <span>(八) 對關係人之捐贈或對非關係人之重大捐贈。</span><br>
-                    <span>(九) 董事及經理人薪資報酬。</span><br>
-                    <span>(十) 依證交法第十四條之三、其他依法令或章程規定應由股東會決議或董事會決議事項或主管機關規定之重大事項。</span><br><br>
-                    <h5>二、 董事會多元化政策</h5>
-                    <span>本公司依據《公司治理實務守則》第 20 條及《董事選舉辦法》第 3 條規定，確保董事會成員具備履行職務所需之知識、技能與素養。</span><br>
-                    <span>為落實董事會多元化政策，本公司設定以下具體目標：</span><br>
-                    <span>(一) 性別多元化：董事會中至少應有一席女性董事。</span><br>
-                    <span>(二) 專業多元化：至少一席董事應具備會計或財務專長。</span><br>
-                    <span>本公司於 <span>113 年度已符合上述目標</span>，未來將持續檢視並優化董事會成員組成，以確保多元化政策之有效實施，進一步提升公司治理品質。</span>
-
+                    <?php
+                    $sql = " SELECT * FROM director_content ";
+                    $result = $pdo->query($sql);
+                    $rs = $result->fetchAll(PDO::FETCH_ASSOC);
+                    echo $rs[0]['content'];
+                    ?>
                     <!-- <h5 class="card-title">Special title treatment</h5>
                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                 <a href="#" class="btn btn-primary">Go somewhere</a> -->
@@ -103,7 +93,7 @@ $rs_years = $result->fetchAll(PDO::FETCH_ASSOC);
             <!-- 董事會 -->
             <div class="card shadow-sm my-3">
                 <?php for($i=0;$i<count($rs_years);$i++){
-                    $sql = " SELECT * FROM director WHERE years=".$rs_years[$i]['years'];
+                    $sql = " SELECT * FROM director WHERE years=".$rs_years[$i]['years']." order by sort";
                     $result = $pdo->query($sql);
                     $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                 ?>

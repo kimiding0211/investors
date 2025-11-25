@@ -30,7 +30,24 @@
               data-accordion="false"
               id="navigation"
             >
-            <li class="nav-item">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon bi bi-speedometer"></i>
+                  <p>
+                    首頁管理
+                    <i class="nav-arrow bi bi-chevron-right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="./banner.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>大圖輪播</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-speedometer"></i>
                   <p>
@@ -43,6 +60,12 @@
                     <a href="./introduction.php" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>基本資料</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./organization.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>組織架構</p>
                     </a>
                   </li>
                 </ul>
@@ -63,9 +86,21 @@
                     </a>
                   </li>
                   <li class="nav-item">
+                    <a href="./director_content.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>董事會-文案</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
                     <a href="./audit.php" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>審計委員會</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./audit_content.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>審計委員會-文案</p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -75,9 +110,21 @@
                     </a>
                   </li>
                   <li class="nav-item">
+                    <a href="./remuneration_content.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>薪酬委員會-文案</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
                     <a href="./sustain_committee.php" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>永續發展委員會</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./sustain_committee_content.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>永續發展委員會-文案</p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -107,6 +154,12 @@
                     <a href="./financial_statements.php" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>財務報表</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./message.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>重大訊息</p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -158,7 +211,7 @@
                   <li class="nav-item">
                     <a href="./environmental_sustainability.php" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>環境永續性和社會繁榮</p>
+                      <p>環境永續和社會共榮</p>
                     </a>
                   </li>
                   <li class="nav-item">

@@ -11,7 +11,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>昱泉國際投資人 環境永續性和社會繁榮</title>
+    <title>昱泉國際投資人 環境永續和社會共榮</title>
     <meta name="description" content="昱泉國際投資人官網">
     <link rel="icon" href="../images/logo_simple.png" type="image/x-icon">
 
@@ -49,7 +49,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
             <div class="card shadow-sm my-3">
                 <div id="card1" class="card-content">
                     <div class="card-header card-bg fs-1 fw-bolder">
-                        環境永續性和社會繁榮
+                        環境永續和社會共榮
                     </div>
                     <table class="table">
                         <div class="m-3">

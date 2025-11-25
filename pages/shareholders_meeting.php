@@ -67,12 +67,14 @@ $rs_years = $result->fetchAll(PDO::FETCH_ASSOC);
                     選擇年數
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#" data-target='#card1'>114年財務報表</a></li>
-                    <li><a class="dropdown-item" href="#" data-target='#card2'>113年財務報表</a></li>
+                    <?php for($i=0;$i<count($rs_years);$i++){  ?>
+                    <li><a class="dropdown-item" href="#" data-target='#card<?php echo $i+1; ?>'>第<?php echo $rs_years[$i]['years'] ?>年股東會</a></li>
+                    <?php } ?>
+                    <!-- <li><a class="dropdown-item" href="#" data-target='#card2'>113年財務報表</a></li>
                     <li><a class="dropdown-item" href="#" data-target='#card3'>112年財務報表</a></li>
                     <li><a class="dropdown-item" href="#" data-target='#card4'>111年財務報表</a></li>
                     <li><a class="dropdown-item" href="#" data-target='#card5'>110年財務報表</a></li>
-                    <li><a class="dropdown-item" href="#" data-target='#card6'>109年財務報表</a></li>
+                    <li><a class="dropdown-item" href="#" data-target='#card6'>109年財務報表</a></li> -->
                     <!-- <li><a class="dropdown-item" href="#" data-target='#card7'>108年財務報表</a></li> -->
                 </ul>
             </div>

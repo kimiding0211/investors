@@ -21,7 +21,10 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
         <input type="id" name="id" class="form-control" hidden="hidden" value="<?php echo $id; ?>"/>
         <div class="mb-3">
         <label class="form-label">項目</label>
-        <input name="project_name" class="form-control" value="<?php echo $rs[0]['project_name']; ?>"/>
+        <select name="project_name">
+            <option value="內部規章" <?php if($rs[0]['project_name']=='內部規章'){echo 'selected';} ?>>內部規章</option>
+            <option value="治理機制" <?php if($rs[0]['project_name']=='治理機制'){echo 'selected';} ?>>治理機制</option>
+        </select>
         </div>
         <div class="mb-3">
         <label  class="form-label">名稱</label>
