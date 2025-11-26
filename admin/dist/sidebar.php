@@ -136,7 +136,7 @@
                   <li class="nav-item">
                     <a href="./internal_audit.php" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>內部稽核</p>
+                      <p>風險管理與內部稽核</p>
                     </a>
                   </li>
                 </ul>

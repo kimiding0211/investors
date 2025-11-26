@@ -12,7 +12,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
     <div class="col-md-6" style="width:100%">
         <div class="card mb-4">
             <div class="card-header">
-                <h3 class="card-title">公司治理-內部稽核</h3>
+                <h3 class="card-title">公司治理-風險管理與內部稽核</h3>
                 <div class="text-end">
                     <!-- <a href="audit_ins.php" class="btn">
                         <button type="submit" class="btn btn-primary" name="save" value="create">新增</button>
