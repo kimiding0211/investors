@@ -8,7 +8,7 @@ require 'sidebar.php';
 // $result = $pdo->query($sql);
 // $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 
-$perPage = 10; // 每頁筆數
+$perPage = 20; // 每頁筆數
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $page = max($page, 1);
 $offset = ($page - 1) * $perPage;
