@@ -1,5 +1,6 @@
 <?php
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
@@ -122,62 +123,71 @@ if ($file_status_meeting_notice && $file_status_meeting_procedure_manual && $fil
     $date = $_POST['date'];
     $location = $_POST['location'];
     $link_video = $_POST['link_video'];
+    if(!empty($_POST['status'])){
+        $status = $_POST['status'];
+    }else{
+        $status = 0;
+    }
     
     $sql = " select * from shareholders_meeting where id=$id ";
     $result = $pdo->query($sql);
     $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 
+    $sql = " update shareholders_meeting set years=$years, name='$name', date='$date', location='$location', link_video='$link_video', status=$status ";
+
+
     if(!empty($fileName_meeting_notice)){
         $meeting_notice = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_notice;
+        $sql.= " , meeting_notice='$meeting_notice' ";
     }else{
         if($rs[0]['meeting_notice']){
             $meeting_notice = $rs[0]['meeting_notice'];
-        }else{
-            $meeting_notice = '';
+            $sql.= " , meeting_notice='$meeting_notice' ";
         }
     }
     if(!empty($fileName_meeting_procedure_manual)){
         $meeting_procedure_manual = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_procedure_manual;
+        $sql.= " , meeting_procedure_manual='$meeting_procedure_manual' ";
     }else{
         if($rs[0]['meeting_meeting_procedure_manualnotice']){
             $meeting_procedure_manual = $rs[0]['meeting_procedure_manual'];
-        }else{
-            $meeting_procedure_manual = '';
+            $sql.= " , meeting_procedure_manual='$meeting_procedure_manual' ";
         }
     }
     if(!empty($fileName_major_shareholders)){
         $major_shareholders = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_major_shareholders;
+        $sql.= " , major_shareholders='$major_shareholders' ";
     }else{
         if($rs[0]['major_shareholders']){
             $major_shareholders = $rs[0]['major_shareholders'];
-        }else{
-            $major_shareholders = '';
+            $sql.= " , major_shareholders='$major_shareholders' ";
         }
     }
     if(!empty($fileName_annual_report)){
         $annual_report = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_annual_report;
+        $sql.= " ,annual_report='$annual_report' ";
     }else{
         if($rs[0]['annual_report']){
             $annual_report = $rs[0]['annual_report'];
-        }else{
-            $annual_report = '';
+            $sql.= " ,annual_report='$annual_report' ";
         }
     }
     if(!empty($fileName_minutes)){
         $minutes = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_minutes;
+        $sql.= " , minutes='$minutes' ";
     }else{
         if($rs[0]['minutes']){
             $minutes = $rs[0]['minutes'];
-        }else{
-            $minutes = '';
+            $sql.= " , minutes='$minutes' ";
         }
     }
 
-    $sql = " update shareholders_meeting set years=$years, name='$name', date='$date', location='$location', link_video='$link_video',
-             meeting_notice='$meeting_notice', meeting_procedure_manual='$meeting_procedure_manual', major_shareholders='$major_shareholders',
-             annual_report='$annual_report', minutes='$minutes'
-            where id=$id ";
+    $sql.= " where id=$id ";
+    $pdo->query($sql);
 
+    $admin = $_SESSION['admin_name'];
+    $now = date("Y-m-d H:i:s");
+    $sql = " insert into edit_log set user='$admin', menu='編輯股東會', datetime='$now' ";
     $pdo->query($sql);
     echo "<script>alert('資料已更新');window.location.href='shareholders_meeting.php';</script>";
 }else{

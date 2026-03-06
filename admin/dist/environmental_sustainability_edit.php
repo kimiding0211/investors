@@ -1,5 +1,6 @@
 <?php
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
@@ -20,12 +21,12 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
     <div class="card-body">
         <input type="id" name="id" class="form-control" hidden="hidden" value="<?php echo $id; ?>"/>
         <div class="mb-3">
-        <label class="form-label">項目</label>
-        <input name="title" class="form-control" value="<?php echo $rs[0]['title']; ?>"/>
+        <label class="form-label">語言</label>
+        <input name="code" class="form-control" value="<?php echo $rs[0]['code']; ?>"/>
         </div>
         <div class="mb-3">
         <label  class="form-label">內文</label>
-        <textarea id="editor" name="text" style="width: 700px"><?php echo $rs[0]['text']; ?></textarea>
+        <textarea id="editor" name="draft" style="width: 700px"><?php echo $rs[0]['draft']; ?></textarea>
         </div>
         <!-- <div class="input-group mb-3">
         <input type="file" class="form-control" id="inputGroupFile02" />
@@ -39,7 +40,10 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
     <!--end::Body-->
     <!--begin::Footer-->
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary">送出</button>
+        <button type="submit" class="btn btn-primary">儲存草稿</button>
+        <?php if($_SESSION['admin_permissions']=='admin' || $_SESSION['admin_permissions']=='editor'){ ?>
+        <a href="environmental_sustainability_edit_2.php?id=<?php echo $rs[0]['id']; ?>" class="btn btn-primary">發布</a>
+        <?php } ?>
         <a href="environmental_sustainability.php" class="btn btn-primary">返回</a>
     </div>
     <!--end::Footer-->
@@ -55,7 +59,7 @@ require 'footer.php';
 	$('#editor').trumbowyg({
         btns: [
             ['viewHTML'],
-            ['fontsize'],
+            // ['fontsize'],
             ['strong', 'em', 'del', 'underline'],
             ['link', 'upload'],
             ['justifyLeft', 'justifyCenter', 'justifyRight'],

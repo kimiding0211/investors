@@ -1,5 +1,6 @@
 <?php
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
@@ -118,15 +119,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $date = $_POST['date'];
         $location = $_POST['location'];
         $link_video = $_POST['link_video'];
-        $meeting_notice = (!empty($fileName_meeting_notice)) ? "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_notice : '';
-        $meeting_procedure_manual = (!empty($fileName_meeting_procedure_manual)) ? "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_procedure_manual : '';
-        $major_shareholders = (!empty($fileName_major_shareholders)) ? "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_major_shareholders : '';
-        $annual_report = (!empty($fileName_annual_report)) ? "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_annual_report : '';
-        $minutes = (!empty($fileName_minutes)) ? "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_minutes : '';
+        if(!empty($_POST['status'])){
+            $status = $_POST['status'];
+        }else{
+            $status = 0;
+        }
 
-        $sql = " insert into shareholders_meeting set years=$years, name='$name', date='$date', location='$location', link_video='$link_video',
-                 meeting_notice='$meeting_notice', meeting_procedure_manual='$meeting_procedure_manual', major_shareholders='$major_shareholders', 
-                 annual_report='$annual_report', minutes='$minutes' ";
+        $sql = " insert into shareholders_meeting set years=$years, name='$name', date='$date', location='$location', link_video='$link_video', status=$status ";
+
+        if(!empty($fileName_meeting_notice)){
+            $meeting_notice = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_notice;
+            $sql.= " , meeting_notice='$meeting_notice' ";
+        }
+
+        if(!empty($fileName_meeting_procedure_manual)){
+            $meeting_procedure_manua = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_procedure_manual;
+            $sql.= " , meeting_procedure_manual='$meeting_procedure_manual' ";
+        }
+        
+        if(!empty($fileName_major_shareholders)){
+            $major_shareholders = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_major_shareholders;
+            $sql.= " , major_shareholders='$major_shareholders' ";
+        }
+
+        if(!empty($fileName_annual_report)){
+            $annual_report = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_annual_report;
+            $sql.= " , annual_report='$annual_report' "
+        }
+
+        if(!empty($fileName_minutes)){
+            $minutes = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_minutes;
+            $sql.= " , minutes='$minutes' ";
+        }
+
+        $pdo->query($sql);
+
+        $admin = $_SESSION['admin_name'];
+        $now = date("Y-m-d H:i:s");
+        $sql = " insert into ins_log set user='$admin', menu='新增股東會', datetime='$now' ";
         $pdo->query($sql);
         echo "<script>alert('資料已新增');window.location.href='shareholders_meeting.php';</script>";
     }else{
@@ -154,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="mb-3">
         <label  class="form-label">時間</label>
-        <input name="date" class="form-control"/>
+        <input id="datetime" name="date" class="form-control"/>
         </div>
         <div class="mb-3">
         <label  class="form-label">地點</label>
@@ -184,6 +214,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label  class="form-label">影音連結</label>
         <input name="link_video" class="form-control"/>
         </div>
+        <?php if($_SESSION['admin_permissions']=='admin' || $_SESSION['admin_permissions']=='editor'){ ?>
+        <div class="mb-3">
+        <label  class="form-label">狀態</label>
+        <select name="status">
+            <option value="1">啟用</option>
+            <option value="0">停用</option>
+        </select>
+        </div>
+        <?php } ?>
         <!-- <div class="input-group mb-3">
         <input type="file" class="form-control" id="inputGroupFile02" />
         <label class="input-group-text" for="inputGroupFile02">Upload</label>
@@ -208,3 +247,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 require 'footer.php';
 ?>
+<script>
+    // flatpickr("#datetime", {
+	// 	enableTime: true,
+	// 	dateFormat: "Y-m-d",
+	// 	time_24hr: true,
+	// 	locale: "zh_tw"  // 使用中文
+	// });
+</script>

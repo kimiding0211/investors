@@ -1,59 +1,25 @@
 <?php
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
-$file_status = 1;
 
-if(!empty($_FILES['file']['name'])){
-    $file = $_FILES['file'];
-    $fileName_str = explode(".", $file['name']);
-    $fileName = $_POST['title'].'.'.$fileName_str[1];
-    $tmpPath = $file['tmp_name'];
-
-     $uploadDir = __DIR__ . '/images/organization/';
-    $destination = $uploadDir . $fileName;
-
-    if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true); 
-    }
-
-    if (move_uploaded_file($file['tmp_name'], $destination)) {
-        $file_status = 1;
-    }else{
-        $file_status = 0;
-    }
-}
+$id = $_POST['id'];
+$code = $_POST['code'];
+$draft = $_POST['draft'];
 
 
-if ($file_status) {
-    $id = $_POST['id'];
-    $title = $_POST['title'];
-    
-    $sql = " select * from organization where id=$id ";
-    $result = $pdo->query($sql);
-    $rs = $result->fetchAll(PDO::FETCH_ASSOC);
+$sql = " update organization set draft='$draft'
+         where id=$id ";
 
-    if(!empty($fileName)){
-        $link_url = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/organization/'.$fileName;
-    }else{
-        if($rs[0]['link_url']){
-            $link_url = $rs[0]['link_url'];
-        }else{
-            $link_url = '';
-        }
-    }
+$pdo->query($sql);
 
-    $sql = " update organization set title='$title', link_url='$link_url'
-            where id=$id ";
-
-    $pdo->query($sql);
-    echo "<script>alert('資料已更新');window.location.href='organization.php';</script>";
-}else{
-    echo "<script>alert('上傳失敗');window.location.href='organization.php';</script>";
-}
-
-
+$admin = $_SESSION['admin_name'];
+$now = date("Y-m-d H:i:s");
+$sql = " insert into edit_log set user='$admin', menu='編輯組織架構', datetime='$now' ";
+$pdo->query($sql);
+echo "<script>alert('草稿儲存成功');window.location.href='organization_edit.php?id=$id';</script>";
 
 require 'footer.php';
 ?>

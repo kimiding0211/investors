@@ -1,5 +1,6 @@
 <?php
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
@@ -18,6 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }else{
         $pwd = md5($pwd);
         $sql = " insert into admin set name='$name', password='$pwd', status=$status, permissions='$permissions' ";
+        $pdo->query($sql);
+
+        $admin = $_SESSION['admin_name'];
+        $now = date("Y-m-d H:i:s");
+        $sql = " insert into ins_log set user='$admin', menu='新增帳號[$name]', datetime='$now' ";
         $pdo->query($sql);
         echo "<script>alert('帳號已新增');window.location.href='admin_user.php';</script>";
         // header("Location:admin_user.php");
@@ -44,7 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="mb-3">
         <label class="form-label">權限</label>
-        <input name="permissions" class="form-control"/>
+        <select name="permissions">
+            <option value="user">user</option>
+            <option value="editor">editor</option>
+            <option value="admin">admin</option>
+        </select>
         </div>
         <div class="mb-3">
         <label  class="form-label">狀態</label>

@@ -1,6 +1,7 @@
 <?php
 require 'web_config.php';
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 
 $sql = " select * from conference ";
@@ -28,6 +29,8 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                     <th>年度</th>
                     <th>時間</th>
                     <th>地點</th>
+                    <th>地點(英)</th>
+                    <th style="width: 40px">狀態</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -38,13 +41,21 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $rs[$i]['years']; ?></td>
                     <td><?php echo $rs[$i]['date']; ?></td>
                     <td><?php echo $rs[$i]['location']; ?></td>
+                    <td><?php echo $rs[$i]['location_en']; ?></td>
+                    <?php if($rs[$i]['status']==1){ ?>
+                    <td><span class="badge text-bg-success">啟用</span></td>
+                    <?php }else{ ?>
+                    <td><span class="badge text-bg-danger">停用</span></td>
+                    <?php } ?>
                     <td>
                         <a href="conference_edit.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
                             <button class="btn btn-primary" name="save">編輯</button>
                         </a>
-                        <a href="conference_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
+                        <?php if($_SESSION['admin_permissions']=='admin' || $_SESSION['admin_permissions']=='editor'){ ?>
+                        <a href="conference_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn" onclick="return confirm('確定刪除這筆資料？')" style="width=11%">
                             <button class="btn btn-primary" name="save">刪除</button>
                         </a>
+                        <?php } ?>
                         <?php if(!empty($rs[$i]['link_cn'])){ ?>
                         <a href='<?php echo $rs[$i]['link_cn']; ?>' target='_blank'>檔案預覽(中)</a>
                         <?php } ?>

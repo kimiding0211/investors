@@ -1,19 +1,25 @@
 <?php
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
 
 $id = $_POST['id'];
-$title = $_POST['title'];
-$text = $_POST['text'];
+$code = $_POST['code'];
+$draft = $_POST['draft'];
 
 
-$sql = " update message set title='$title', text='$text'
+$sql = " update message set code='$code', draft='$draft'
          where id=$id ";
 
 $pdo->query($sql);
-echo "<script>alert('資料已更新');window.location.href='message.php';</script>";
+
+$admin = $_SESSION['admin_name'];
+$now = date("Y-m-d H:i:s");
+$sql = " insert into edit_log set user='$admin', menu='編輯重大訊息', datetime='$now' ";
+$pdo->query($sql);
+echo "<script>alert('草稿儲存成功');window.location.href='message_edit.php?id=$id';</script>";
 
 require 'footer.php';
 ?>

@@ -1,5 +1,6 @@
 <?php
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
@@ -28,21 +29,42 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
         <input name="identity" class="form-control" value="<?php echo $rs[0]['identity']; ?>"/>
         </div>
         <div class="mb-3">
+        <label  class="form-label">身份別(英)</label>
+        <input name="identity_en" class="form-control" value="<?php echo $rs[0]['identity_en']; ?>"/>
+        </div>
+        <div class="mb-3">
         <label  class="form-label">姓名</label>
         <input name="name" class="form-control" value="<?php echo $rs[0]['name']; ?>"/>
+        </div>
+        <div class="mb-3">
+        <label  class="form-label">姓名(英)</label>
+        <input name="name_en" class="form-control" value="<?php echo $rs[0]['name_en']; ?>"/>
         </div>
         <div class="mb-3">
         <label  class="form-label">主要經(學)歷</label>
         <textarea id="editor" name="main_experience"><?php echo $rs[0]['main_experience']; ?></textarea>
         </div>
         <div class="mb-3">
+        <label  class="form-label">主要經(學)歷(英)</label>
+        <textarea id="editor1" name="main_experience_en"><?php echo $rs[0]['main_experience_en']; ?></textarea>
+        </div>
+        <div class="mb-3">
         <label  class="form-label">選任日期</label>
-        <input name="election_date" class="form-control" value="<?php echo $rs[0]['election_date']; ?>"/>
+        <input id="datetime" name="election_date" class="form-control" value="<?php echo $rs[0]['election_date']; ?>"/>
         </div>
         <div class="mb-3">
         <label  class="form-label">排序</label>
         <input name="sort" class="form-control" value="<?php echo $rs[0]['sort']; ?>"/>
         </div>
+        <?php if($_SESSION['admin_permissions']=='admin' || $_SESSION['admin_permissions']=='editor'){ ?>
+        <div class="mb-3">
+        <label  class="form-label">狀態</label>
+        <select name="status">
+            <option value="1" <?php if($rs[0]['status']==1){echo 'selected';} ?>>啟用</option>
+            <option value="0" <?php if($rs[0]['status']==0){echo 'selected';} ?>>停用</option>
+        </select>
+        </div>
+        <?php } ?>
         <!-- <div class="input-group mb-3">
         <input type="file" class="form-control" id="inputGroupFile02" />
         <label class="input-group-text" for="inputGroupFile02">Upload</label>
@@ -71,7 +93,7 @@ require 'footer.php';
 	$('#editor').trumbowyg({
         btns: [
             ['viewHTML'],
-            ['fontsize'],
+            // ['fontsize'],
             ['strong', 'em', 'del', 'underline'],
             ['link', 'upload'],
             ['justifyLeft', 'justifyCenter', 'justifyRight'],
@@ -88,4 +110,31 @@ require 'footer.php';
             }
         }
     });
+    $('#editor1').trumbowyg({
+        btns: [
+            ['viewHTML'],
+            // ['fontsize'],
+            ['strong', 'em', 'del', 'underline'],
+            ['link', 'upload'],
+            ['justifyLeft', 'justifyCenter', 'justifyRight'],
+            ['unorderedList', 'orderedList'],
+            ['horizontalRule'],
+            ['foreColor', 'backColor'],
+            // ['table'],
+        ],
+        plugins: {
+            upload: {
+                serverPath: 'upload.php', // 你自己的圖片上傳 API
+                fileFieldName: 'upload',
+                urlPropertyName: 'url' // upload.php 回傳 JSON 裡的圖片網址 key
+            }
+        }
+    });
+
+    flatpickr("#datetime", {
+		enableTime: true,
+		dateFormat: "Y-m-d",
+		time_24hr: true,
+		locale: "zh_tw"  // 使用中文
+	});
 </script>

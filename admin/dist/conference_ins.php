@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
@@ -34,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(!empty($_FILES['file_en']['name'])){
         $file = $_FILES['file_en'];
         $fileName_str = explode(".", $file['name']);
-        $fileName_en = $_POST['years'].'法人說明會.'.$fileName_str[1];
+        $fileName_en = $_POST['years'].'法人說明會_en.'.$fileName_str[1];
         $tmpPath = $file['tmp_name'];
 
         $uploadDir = __DIR__ . '/images/conference/'.$_POST['years'].'/';
@@ -55,11 +56,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $years = $_POST['years'];
         $date = $_POST['date'];
         $location = $_POST['location'];
+        $location_en = $_POST['location_en'];
         $link_video = $_POST['link_video'];
-        $link_cn = (!empty($fileName_cn)) ? 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/conference/'.$years.'/'.$fileName_cn : '';
-        $link_en = (!empty($fileName_en)) ? 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/conference/'.$years.'/'.$fileName_en : '';
+        if(!empty($_POST['status'])){
+            $status = $_POST['status'];
+        }else{
+            $status = 0;
+        }
 
-        $sql = " insert into conference set years='$years', date='$date', location='$location', link_video='$link_video', link_cn='$link_cn', link_en='$link_en' ";
+        $sql = " insert into conference set years='$years', date='$date', location='$location', location_en='$location_en', link_video='$link_video', status=$status ";
+        
+        if(!empty($fileName_cn)){
+            $link_cn = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/conference/'.$years.'/'.$fileName_cn;
+            $sql.= " , link_cn='$link_cn' ";
+        }
+
+        if(!empty($fileName_en)){
+            $link_en = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/conference/'.$years.'/'.$fileName_en;
+            $sql.= " , link_en='$link_en' ";
+        }
+
+        $pdo->query($sql);
+
+        $admin = $_SESSION['admin_name'];
+        $now = date("Y-m-d H:i:s");
+        $sql = " insert into ins_log set user='$admin', menu='新增法人說明會資訊', datetime='$now' ";
         $pdo->query($sql);
         echo "<script>alert('資料已新增');window.location.href='conference.php';</script>";
     }else{
@@ -83,11 +104,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="mb-3">
         <label  class="form-label">時間</label>
-        <input name="date" class="form-control"/>
+        <input id="datetime" name="date" class="form-control"/>
         </div>
         <div class="mb-3">
         <label  class="form-label">地點</label>
         <input name="location" class="form-control"/>
+        </div>
+        <div class="mb-3">
+        <label  class="form-label">地點(英)</label>
+        <input name="location_en" class="form-control"/>
         </div>
         <div class="mb-3">
         <label  class="form-label">檔案連結(中)</label>
@@ -103,6 +128,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label  class="form-label">影音連結</label>
         <input name="link_video" class="form-control"/>
         </div>
+        <?php if($_SESSION['admin_permissions']=='admin' || $_SESSION['admin_permissions']=='editor'){ ?>
+        <div class="mb-3">
+        <label  class="form-label">狀態</label>
+        <select name="status">
+            <option value="1">啟用</option>
+            <option value="0">停用</option>
+        </select>
+        </div>
+        <?php } ?>
         <!-- <div class="input-group mb-3">
         <input type="file" class="form-control" id="inputGroupFile02" />
         <label class="input-group-text" for="inputGroupFile02">Upload</label>
@@ -127,3 +161,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 require 'footer.php';
 ?>
+<script>
+    flatpickr("#datetime", {
+		enableTime: true,
+		dateFormat: "Y-m-d",
+		time_24hr: true,
+		locale: "zh_tw"  // 使用中文
+	});
+</script>

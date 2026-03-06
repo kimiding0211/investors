@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
@@ -34,9 +35,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($file_status) {
         $title = $_POST['title'];
         $project_name = $_POST['project_name'];
-        $link_url = (!empty($fileName)) ? 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/company_regulations/'.$fileName : '';
+        if(!empty($_POST['status'])){
+            $status = $_POST['status'];
+        }else{
+            $status = 0;
+        }
 
-        $sql = " insert into company_regulations set title='$title', project_name='$project_name', link_url='$link_url' ";
+        $sql = " insert into company_regulations set title='$title', project_name='$project_name' ";
+        if(!empty($fileName)){
+            $link_url = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/company_regulations/'.$fileName;
+            $sql.= " , link_url='$link_url' ";
+        }
+        $pdo->query($sql);
+
+        $admin = $_SESSION['admin_name'];
+        $now = date("Y-m-d H:i:s");
+        $sql = " insert into ins_log set user='$admin', menu='新增內部規章與治理機制', datetime='$now' ";
         $pdo->query($sql);
         echo "<script>alert('資料已新增');window.location.href='company_regulations.php';</script>";
     }else{
@@ -70,6 +84,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="file" class="form-control" id="inputGroupFile01" name="file"/>
         <label class="input-group-text" for="inputGroupFile01">Upload</label>
         </div>
+        <?php if($_SESSION['admin_permissions']=='admin' || $_SESSION['admin_permissions']=='editor'){ ?>
+        <div class="mb-3">
+        <label  class="form-label">狀態</label>
+        <select name="status">
+            <option value="1">啟用</option>
+            <option value="0">停用</option>
+        </select>
+        </div>
+        <?php } ?>
         <!-- <div class="input-group mb-3">
         <input type="file" class="form-control" id="inputGroupFile02" />
         <label class="input-group-text" for="inputGroupFile02">Upload</label>

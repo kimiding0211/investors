@@ -1,6 +1,7 @@
 <?php
 require 'web_config.php';
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 
 $sql = " select * from company_regulations ";
@@ -27,6 +28,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                     <th style="width: 10px">id</th>
                     <th>項目</th>
                     <th>名稱</th>
+                    <th style="width: 40px">狀態</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -36,13 +38,20 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $rs[$i]['id']; ?></td>
                     <td><?php echo $rs[$i]['project_name']; ?></td>
                     <td><?php echo $rs[$i]['title']; ?></td>
+                    <?php if($rs[$i]['status']==1){ ?>
+                    <td><span class="badge text-bg-success">啟用</span></td>
+                    <?php }else{ ?>
+                    <td><span class="badge text-bg-danger">停用</span></td>
+                    <?php } ?>
                     <td>
                         <a href="company_regulations_edit.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
                             <button class="btn btn-primary" name="save">編輯</button>
                         </a>
-                        <a href="company_regulations_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
+                        <?php if($_SESSION['admin_permissions']=='admin' || $_SESSION['admin_permissions']=='editor'){ ?>
+                        <a href="company_regulations_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn" onclick="return confirm('確定刪除這筆資料？')" style="width=11%">
                             <button class="btn btn-primary" name="save">刪除</button>
                         </a>
+                        <?php } ?>
                         <?php if(isset($rs[$i]['link_url'])){ ?>
                         <a href='<?php echo $rs[$i]['link_url']; ?>' target='_blank'>檔案預覽</a>
                         <?php } ?>

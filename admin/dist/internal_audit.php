@@ -1,6 +1,7 @@
 <?php
 require 'web_config.php';
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 
 $sql = " select * from internal_audit ";
@@ -25,7 +26,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                 <thead>
                 <tr>
                     <th style="width: 10px">id</th>
-                    <th>項目</th>
+                    <th>語言</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -33,7 +34,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                 <?php for($i=0;$i<count($rs);$i++){ ?>
                 <tr class="align-middle">
                     <td><?php echo $rs[$i]['id']; ?></td>
-                    <td><?php echo $rs[$i]['title']; ?></td>
+                    <td><?php echo $rs[$i]['code']; ?></td>
                     <td>
                         <a href="internal_audit_edit.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
                             <button class="btn btn-primary" name="save">編輯</button>

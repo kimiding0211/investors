@@ -1,9 +1,10 @@
 <?php
 require 'web_config.php';
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 
-$sql = " select * from organization order by id desc ";
+$sql = " select * from organization ";
 $result = $pdo->query($sql);
 $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 
@@ -25,7 +26,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                 <thead>
                 <tr>
                     <th style="width: 10px">id</th>
-                    <th>名稱</th>
+                    <th>語言</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -33,14 +34,11 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                 <?php for($i=0;$i<count($rs);$i++){ ?>
                 <tr class="align-middle">
                     <td><?php echo $rs[$i]['id']; ?></td>
-                    <td><?php echo $rs[$i]['title']; ?></td>
+                    <td><?php echo $rs[$i]['code']; ?></td>
                     <td>
                         <a href="organization_edit.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
                             <button class="btn btn-primary" name="save">編輯</button>
                         </a>
-                        <?php if(isset($rs[$i]['link_url'])){ ?>
-                        <a href='<?php echo $rs[$i]['link_url']; ?>' target='_blank'>檔案預覽</a>
-                        <?php } ?>
                     </td>
                     
                 </tr>

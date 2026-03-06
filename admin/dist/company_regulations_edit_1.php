@@ -1,5 +1,6 @@
 <?php
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
@@ -29,24 +30,36 @@ if ($file_status) {
     $id = $_POST['id'];
     $project_name = $_POST['project_name'];
     $title = $_POST['title'];
+    if(!empty($_POST['status'])){
+        $status = $_POST['status'];
+    }else{
+        $status = 0;
+    }
     
     $sql = " select * from sustainability_reports where id=$id ";
     $result = $pdo->query($sql);
     $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 
+    
+
+    $sql = " update company_regulations set project_name='$project_name', title='$title', link_url='$link_url', status=$status ";
+
     if(!empty($fileName)){
         $link_url = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/company_regulations/'.$fileName;
+        $sql.= " , link_url='$link_url' ";
     }else{
         if($rs[0]['link_url']){
             $link_url = $rs[0]['link_url'];
-        }else{
-            $link_url = '';
+            $sql.= " , link_url='$link_url' ";
         }
     }
+    $sql.= " where id=$id ";
+    
+    $pdo->query($sql);
 
-    $sql = " update company_regulations set project_name='$project_name', title='$title', link_url='$link_url'
-            where id=$id ";
-
+    $admin = $_SESSION['admin_name'];
+    $now = date("Y-m-d H:i:s");
+    $sql = " insert into edit_log set user='$admin', menu='編輯內部規章與治理機制', datetime='$now' ";
     $pdo->query($sql);
     echo "<script>alert('資料已更新');window.location.href='company_regulations.php';</script>";
 }else{

@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
@@ -34,10 +35,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($file_status) {
         $title = $_POST['title'];
         $sort = $_POST['sort'];
-        $status = $_POST['status'];
-        $link_url = (!empty($fileName)) ? 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/banner/'.$fileName : '';
+        if(!empty($_POST['status'])){
+            $status = $_POST['status'];
+        }else{
+            $status = 0;
+        }
 
-        $sql = " insert into banner set title='$title', sort=$sort, status='$status', link_url='$link_url' ";
+        $sql = " insert into banner set title='$title', sort=$sort, status='$status' ";
+
+        if(!empty($fileName)){
+            $link_url = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/banner/'.$fileName;
+            $sql.= " , link_url='$link_url' ";
+        }
+
+        $pdo->query($sql);
+
+        $admin = $_SESSION['admin_name'];
+        $now = date("Y-m-d H:i:s");
+        $sql = " insert into ins_log set user='$admin', menu='新增大圖輪播', datetime='$now' ";
         $pdo->query($sql);
         echo "<script>alert('資料已新增');window.location.href='banner.php';</script>";
     }else{
@@ -63,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label class="form-label">排序</label>
         <input name="sort" class="form-control"/>
         </div>
+        <?php if($_SESSION['admin_permissions']=='admin' || $_SESSION['admin_permissions']=='editor'){ ?>
         <div class="mb-3">
         <label  class="form-label">狀態</label>
         <select name="status">
@@ -70,6 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <option value="0">停用</option>
         </select>
         </div>
+        <?php } ?>
         <div class="mb-3">
         <label  class="form-label">檔案</label>
         <input type="file" class="form-control" id="inputGroupFile01" name="file"/>

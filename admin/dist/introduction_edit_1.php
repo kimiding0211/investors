@@ -1,5 +1,6 @@
 <?php
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
@@ -18,15 +19,25 @@ $visa_accountant = $_POST['visa_accountant'];
 $chairman = $_POST['chairman'];
 $president = $_POST['president'];
 $spokesman = $_POST['spokesman'];
+if(!empty($_POST['status'])){
+        $status = $_POST['status'];
+}else{
+        $status = 0;
+}
 
 
 
 $sql = " update introduction set name='$name', name_en='$name_en', code=$code, market='$market', industry='$industry'
         , date_of_establishment='$date_of_establishment', otc_listing_date='$otc_listing_date', paid_in_capital='$paid_in_capital'
         , stock_transfer_agency='$stock_transfer_agency', visa_accountant='$visa_accountant', chairman='$chairman'
-        , president='$president', spokesman='$spokesman' 
+        , president='$president', spokesman='$spokesman', status=$status 
          where id=$id ";
 
+$pdo->query($sql);
+
+$admin = $_SESSION['admin_name'];
+$now = date("Y-m-d H:i:s");
+$sql = " insert into edit_log set user='$admin', menu='編輯基本資料', datetime='$now' ";
 $pdo->query($sql);
 echo "<script>alert('資料已更新');window.location.href='introduction.php';</script>";
 

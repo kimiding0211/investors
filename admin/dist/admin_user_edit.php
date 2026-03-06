@@ -1,5 +1,6 @@
 <?php
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
@@ -21,7 +22,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
         <input type="id" name="id" class="form-control" hidden="hidden" value="<?php echo $admin_id; ?>"/>
         <div class="mb-3">
         <label class="form-label">名稱</label>
-        <input type="name" name="user_name" class="form-control" value="<?php echo $rs[0]['name']; ?>"/>
+        <input type="name" name="user_name" class="form-control" value="<?php echo $rs[0]['name']; ?>"  readonly/>
         </div>
         <div class="mb-3">
         <label  class="form-label">密碼</label>
@@ -30,15 +31,25 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="mb-3">
         <label class="form-label">權限</label>
-        <input name="permissions" class="form-control" value="<?php echo $rs[0]['permissions']; ?>" <?php if($rs[0]['permissions']!='superadmin'){echo 'readonly';} ?>/>
+        <select name="permissions" <?php if($_SESSION['admin_name']==$rs[0]['name']){echo "disabled";} ?>>
+            <option value="user" <?php if($rs[0]['permissions']=="user"){echo 'selected';} ?>>user</option>
+            <option value="editor" <?php if($rs[0]['permissions']=="editor"){echo 'selected';} ?>>editor</option>
+            <option value="admin" <?php if($rs[0]['permissions']=="admin"){echo 'selected';} ?>>admin</option>
+        </select>
+        <?php if($_SESSION['admin_name']==$rs[0]['name']){ ?>
+        <input type="hidden" name="permissions" value="<?php echo $rs[0]['permissions']; ?>">
+        <?php } ?>
         </div>
         <div class="mb-3">
         <label  class="form-label">狀態</label>
     
-        <select name="status">
+        <select name="status" <?php if($_SESSION['admin_name']==$rs[0]['name']){echo "disabled";} ?>>
             <option value="1" <?php if($rs[0]['status']==1){echo 'selected';} ?>>啟用</option>
             <option value="0" <?php if($rs[0]['status']==0){echo 'selected';} ?>>停用</option>
         </select>
+        <?php if($_SESSION['admin_name']==$rs[0]['name']){ ?>
+        <input type="hidden" name="status" value="<?php echo $rs[0]['status']; ?>">
+        <?php } ?>
         </div>
         <!-- <div class="input-group mb-3">
         <input type="file" class="form-control" id="inputGroupFile02" />

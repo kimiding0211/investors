@@ -1,6 +1,7 @@
 <?php
 require 'web_config.php';
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 
 $sql = " select * from banner order by id desc ";

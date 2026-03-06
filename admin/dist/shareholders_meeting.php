@@ -1,6 +1,7 @@
 <?php
 require 'web_config.php';
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 
 $sql = " select * from shareholders_meeting ";
@@ -30,6 +31,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                     <th>時間</th>
                     <th>地點</th>
                     <th></th>
+                    <th style="width: 40px">狀態</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -58,13 +60,20 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                         <a href='<?php echo $rs[$i]['minutes']; ?>' target='_blank'>股東會議事錄</a>
                         <?php } ?>
                     </td>
+                    <?php if($rs[$i]['status']==1){ ?>
+                    <td><span class="badge text-bg-success">啟用</span></td>
+                    <?php }else{ ?>
+                    <td><span class="badge text-bg-danger">停用</span></td>
+                    <?php } ?>
                     <td>
                         <a href="shareholders_meeting_edit.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
                             <button class="btn btn-primary" name="save">編輯</button>
                         </a>
-                        <a href="shareholders_meeting_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
+                        <?php if($_SESSION['admin_permissions']=='admin' || $_SESSION['admin_permissions']=='editor'){ ?>
+                        <a href="shareholders_meeting_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn" onclick="return confirm('確定刪除這筆資料？')" style="width=11%">
                             <button class="btn btn-primary" name="save">刪除</button>
                         </a>
+                        <?php } ?>
                     </td>
                     
                 </tr>

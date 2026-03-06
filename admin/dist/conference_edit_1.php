@@ -1,5 +1,6 @@
 <?php
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 require 'web_config.php';
 
@@ -33,7 +34,7 @@ if(!empty($_FILES['file_cn']['name'])){
 if(!empty($_FILES['file_en']['name'])){
     $file = $_FILES['file_en'];
     $fileName_str = explode(".", $file['name']);
-    $fileName_en = $_POST['years'].'法人說明會.'.$fileName_str[1];
+    $fileName_en = $_POST['years'].'法人說明會_en.'.$fileName_str[1];
     $tmpPath = $file['tmp_name'];
 
     $uploadDir = __DIR__ . '/images/conference/'.$_POST['years'].'/';
@@ -56,34 +57,45 @@ if ($file_status_cn && $file_status_en) {
     $years = $_POST['years'];
     $date = $_POST['date'];
     $location = $_POST['location'];
+    $location_en = $_POST['location_en'];
     $link_video = $_POST['link_video'];
+    if(!empty($_POST['status'])){
+        $status = $_POST['status'];
+    }else{
+        $status = 0;
+    }
     
     $sql = " select * from conference where id=$id ";
     $result = $pdo->query($sql);
     $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 
+    $sql = " update conference set years='$years', date='$date', location='$location', location_en='$location_en', link_video='$link_video', status=$status";
+
     if(!empty($fileName_cn)){
         $link_cn = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/conference/'.$years.'/'.$fileName_cn;
+        $sql.= " , link_cn='$link_cn' ";
     }else{
         if($rs[0]['link_cn']){
             $link_cn = $rs[0]['link_cn'];
-        }else{
-            $link_cn = '';
+            $sql.= " , link_cn='$link_cn' ";
         }
     }
     if(!empty($fileName_en)){
         $link_en = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/conference/'.$years.'/'.$fileName_en;
+        $sql.= " , link_en='$link_en' ";
     }else{
         if($rs[0]['link_cn']){
             $link_en = $rs[0]['link_en'];
-        }else{
-            $link_en = '';
+            $sql.= " , link_en='$link_en' ";
         }
     }
 
-    $sql = " update conference set years='$years', date='$date', location='$location', link_video='$link_video', link_cn='$link_cn', link_en='$link_en'
-            where id=$id ";
+    $sql.= " where id=$id ";
+    $pdo->query($sql);
 
+    $admin = $_SESSION['admin_name'];
+    $now = date("Y-m-d H:i:s");
+    $sql = " insert into edit_log set user='$admin', menu='編輯法人說明會資訊', datetime='$now' ";
     $pdo->query($sql);
     echo "<script>alert('資料已更新');window.location.href='conference.php';</script>";
 }else{

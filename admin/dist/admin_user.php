@@ -1,9 +1,10 @@
 <?php
 require 'web_config.php';
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 
-if($_SESSION['admin_permissions']!='superadmin'){
+if($_SESSION['admin_permissions']!='admin'){
     echo "<script>window.location.href='index.php';</script>";
 }
 
@@ -50,6 +51,11 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                         <a href="admin_user_edit.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
                             <button class="btn btn-primary" name="save">編輯</button>
                         </a>
+                        <?php if($_SESSION['admin_permissions']=='admin'){ ?>
+                        <a href="admin_user_del.php?id=<?php echo $rs[$i]['id'];  ?>" onclick="return confirm('確定刪除這筆資料？')" class="btn"  style="width=11%" >
+                            <button class="btn btn-primary" name="save">刪除</button>
+                        </a>
+                        <?php } ?>
                     </td>
                     
                 </tr>

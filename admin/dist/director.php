@@ -1,6 +1,7 @@
 <?php
 require 'web_config.php';
 require 'head.php';
+require 'common.php';
 require 'sidebar.php';
 
 $sql = " select * from director ";
@@ -29,6 +30,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                     <th>身分別</th>
                     <th>姓名</th>
                     <th>排序</th>
+                    <th style="width: 40px">狀態</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -40,13 +42,20 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $rs[$i]['identity']; ?></td>
                     <td><?php echo $rs[$i]['name']; ?></td>
                     <td><?php echo $rs[$i]['sort']; ?></td>
+                    <?php if($rs[$i]['status']==1){ ?>
+                    <td><span class="badge text-bg-success">啟用</span></td>
+                    <?php }else{ ?>
+                    <td><span class="badge text-bg-danger">停用</span></td>
+                    <?php } ?>
                     <td>
                         <a href="director_edit.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
                             <button class="btn btn-primary" name="save">編輯</button>
                         </a>
-                        <a href="director_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn"  style="width=11%">
+                        <?php if($_SESSION['admin_permissions']=='admin' || $_SESSION['admin_permissions']=='editor'){ ?>
+                        <a href="director_del.php?id=<?php echo $rs[$i]['id'];  ?>" class="btn" onclick="return confirm('確定刪除這筆資料？')" style="width=11%">
                             <button class="btn btn-primary" name="save">刪除</button>
                         </a>
+                        <?php } ?>
                     </td>
                     
                 </tr>

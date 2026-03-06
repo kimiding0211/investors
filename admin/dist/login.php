@@ -16,15 +16,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $result = $pdo->query($sql);
   $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 
-  $check_pwd = md5($pwd);
-  if($check_pwd == $rs[0]['password']){
-    $_SESSION['admin_id'] = $rs[0]['id'];
-    $_SESSION['admin_name'] = $name;
-    $_SESSION['admin_permissions'] = $rs[0]['permissions'];
-    
-    header("Location: index.php");
+  if(count($rs)>0){
+    if($rs[0]['status']==0){
+      echo '帳號已停用';
+    }else{
+      $check_pwd = md5($pwd);
+      if($check_pwd == $rs[0]['password']){
+        $_SESSION['admin_id'] = $rs[0]['id'];
+        $_SESSION['admin_name'] = $name;
+        $_SESSION['admin_permissions'] = $rs[0]['permissions'];
+
+        $now = date("Y-m-d H:i:s");
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $sql = " insert into login_log set user='$name', ip='$ip', datetime='$now' ";
+        $pdo->query($sql);
+        
+        header("Location: index.php");
+      }else{
+          echo '帳密錯誤';
+      }
+    }
   }else{
-      echo '帳密錯誤';
+    echo '帳號不存在';
   }
 }
 ?>
