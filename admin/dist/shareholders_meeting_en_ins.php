@@ -144,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if(!empty($fileName_annual_report)){
             $annual_report = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting_en/$name/".$fileName_annual_report;
-            $sql.= " , annual_report='$annual_report' "
+            $sql.= " , annual_report='$annual_report' ";
         }
 
         if(!empty($fileName_minutes)){

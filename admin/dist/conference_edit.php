@@ -86,10 +86,10 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 require 'footer.php';
 ?>
 <script>
-    flatpickr("#datetime", {
-		enableTime: true,
-		dateFormat: "Y-m-d",
-		time_24hr: true,
-		locale: "zh_tw"  // 使用中文
-	});
+    // flatpickr("#datetime", {
+	// 	enableTime: true,
+	// 	dateFormat: "Y-m-d",
+	// 	time_24hr: true,
+	// 	locale: "zh_tw"  // 使用中文
+	// });
 </script>

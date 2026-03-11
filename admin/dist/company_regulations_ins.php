@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $status = 0;
         }
 
-        $sql = " insert into company_regulations set title='$title', project_name='$project_name' ";
+        $sql = " insert into company_regulations set title='$title', project_name='$project_name', status=$status ";
         if(!empty($fileName)){
             $link_url = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/company_regulations/'.$fileName;
             $sql.= " , link_url='$link_url' ";

@@ -40,26 +40,11 @@ if ($file_status) {
     $result = $pdo->query($sql);
     $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 
-    if(!empty($fileName)){
-        $link_url = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/company_regulations/'.$fileName;
-    }else{
-        if($rs[0]['link_url']){
-            $link_url = $rs[0]['link_url'];
-        }else{
-            $link_url = '';
-        }
-    }
-
     $sql = " update company_regulations_en set project_name='$project_name', title='$title', status=$status";
 
     if(!empty($fileName)){
         $link_url = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/company_regulations/'.$fileName;
         $sql.= " , link_url='$link_url' ";
-    }else{
-        if($rs[0]['link_url']){
-            $link_url = $rs[0]['link_url'];
-            $sql.= " , link_url='$link_url' ";
-        }
     }
     $sql.= " where id=$id ";
     

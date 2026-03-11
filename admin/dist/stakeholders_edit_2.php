@@ -14,7 +14,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 $draft = $rs[0]['draft'];
 
 
-$sql = " update stakeholders set draft='$draft' where id=$id ";
+$sql = " update stakeholders set content='$draft' where id=$id ";
 
 $pdo->query($sql);
 

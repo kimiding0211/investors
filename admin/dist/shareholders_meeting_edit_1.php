@@ -139,47 +139,22 @@ if ($file_status_meeting_notice && $file_status_meeting_procedure_manual && $fil
     if(!empty($fileName_meeting_notice)){
         $meeting_notice = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_notice;
         $sql.= " , meeting_notice='$meeting_notice' ";
-    }else{
-        if($rs[0]['meeting_notice']){
-            $meeting_notice = $rs[0]['meeting_notice'];
-            $sql.= " , meeting_notice='$meeting_notice' ";
-        }
     }
     if(!empty($fileName_meeting_procedure_manual)){
         $meeting_procedure_manual = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_meeting_procedure_manual;
         $sql.= " , meeting_procedure_manual='$meeting_procedure_manual' ";
-    }else{
-        if($rs[0]['meeting_meeting_procedure_manualnotice']){
-            $meeting_procedure_manual = $rs[0]['meeting_procedure_manual'];
-            $sql.= " , meeting_procedure_manual='$meeting_procedure_manual' ";
-        }
     }
     if(!empty($fileName_major_shareholders)){
         $major_shareholders = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_major_shareholders;
         $sql.= " , major_shareholders='$major_shareholders' ";
-    }else{
-        if($rs[0]['major_shareholders']){
-            $major_shareholders = $rs[0]['major_shareholders'];
-            $sql.= " , major_shareholders='$major_shareholders' ";
-        }
     }
     if(!empty($fileName_annual_report)){
         $annual_report = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_annual_report;
         $sql.= " ,annual_report='$annual_report' ";
-    }else{
-        if($rs[0]['annual_report']){
-            $annual_report = $rs[0]['annual_report'];
-            $sql.= " ,annual_report='$annual_report' ";
-        }
     }
     if(!empty($fileName_minutes)){
         $minutes = "http://".$_SERVER['SERVER_NAME']."/admin/dist/images/shareholders_meeting/$name/".$fileName_minutes;
         $sql.= " , minutes='$minutes' ";
-    }else{
-        if($rs[0]['minutes']){
-            $minutes = $rs[0]['minutes'];
-            $sql.= " , minutes='$minutes' ";
-        }
     }
 
     $sql.= " where id=$id ";

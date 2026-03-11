@@ -36,21 +36,12 @@ if ($file_status) {
     }else{
         $status = 0;
     }
-    
-    $sql = " select * from banner where id=$id ";
-    $result = $pdo->query($sql);
-    $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 
     $sql = " update banner set title='$title', sort=$sort, status=$status ";
 
     if(!empty($fileName)){
         $link_url = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/banner/'.$fileName;
-        $sql.= " , link_url='$link_url ";
-    }else{
-        if($rs[0]['link_url']){
-            $link_url = $rs[0]['link_url'];
-            $sql.= " , link_url='$link_url ";
-        }
+        $sql.= " , link_url='$link_url' ";
     }
 
     $sql.= " where id=$id ";

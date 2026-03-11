@@ -67,21 +67,11 @@ if ($file_status && $file_status_en) {
     if(!empty($fileName)){
         $link_url = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/financial_statements/'.$years.'/'.$fileName;
         $sql.= " , link_url='$link_url' ";
-    }else{
-        if($rs[0]['link_url']){
-            $link_url = $rs[0]['link_url'];
-            $sql.= " , link_url='$link_url' ";
-        }
     }
 
     if(!empty($fileName_en)){
         $link_url = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/financial_statements/'.$years.'/'.$fileName_en;
         $sql.= " , link_en='$link_en' ";
-    }else{
-        if($rs[0]['link_en']){
-            $link_url = $rs[0]['link_en'];
-            $sql.= " , link_en='$link_en' ";
-        }
     }
     
     $sql.= " where id=$id ";

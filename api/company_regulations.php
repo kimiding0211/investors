@@ -19,11 +19,11 @@ $Item = [];
 
 for ($i = 0; $i < count($rs); $i++) {
     if($lang == 'en'){
-        $sql = " select * from company_regulations_en where status=1 and project_name='".$rs[$i]['project_name']."' ";
+        $sql = " select * from company_regulations_en where status=1 and project_name='".$rs[$i]['project_name']."' order by id ";
         $result = $pdo->query($sql);
         $rs1 = $result->fetchAll(PDO::FETCH_ASSOC);
     }else{
-        $sql = " select * from company_regulations where status=1 and project_name='".$rs[$i]['project_name']."' ";
+        $sql = " select * from company_regulations where status=1 and project_name='".$rs[$i]['project_name']."' order by id ";
         $result = $pdo->query($sql);
         $rs1 = $result->fetchAll(PDO::FETCH_ASSOC);
     }

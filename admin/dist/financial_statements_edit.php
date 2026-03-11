@@ -26,7 +26,6 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="mb-3">
         <label  class="form-label">季度</label>
-        <input name="quarterly" class="form-control" value="<?php echo $rs[0]['quarterly']; ?>"/>
         <select name="quarterly">
             <option value="Q1" <?php if($rs[0]['quarterly']=="Q1"){echo 'selected';} ?>>Q1</option>
             <option value="Q2" <?php if($rs[0]['quarterly']=="Q2"){echo 'selected';} ?>>Q2</option>

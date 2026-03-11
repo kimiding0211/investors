@@ -14,7 +14,7 @@ $rs = $result->fetchAll(PDO::FETCH_ASSOC);
 $draft = $rs[0]['draft'];
 
 
-$sql = " update director_content set draft='$draft' where id=$id ";
+$sql = " update director_content set content='$draft' where id=$id ";
 
 $pdo->query($sql);
 

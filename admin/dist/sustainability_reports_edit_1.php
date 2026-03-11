@@ -46,11 +46,6 @@ if ($file_status) {
     if(!empty($fileName)){
         $link_url = 'http://'.$_SERVER['SERVER_NAME'].'/admin/dist/images/sustainability_reports/'.$fileName;
         $sql.= " , link_url='$link_url' ";
-    }else{
-        if($rs[0]['link_url']){
-            $link_url = $rs[0]['link_url'];
-            $sql.= " , link_url='$link_url' ";
-        }
     }
 
     $sql.= " where id=$id ";
