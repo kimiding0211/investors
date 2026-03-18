@@ -27,7 +27,7 @@ for ($i = 0; $i < count($rs); $i++) {
         "title" => $rs[$i]['title'],
         "content" => $rs[$i]['content'],
         "link_url" => $rs[$i]['link_url'],
-        "post_date" => $rs[$i]['post_date'],
+        "post_date" => substr($rs[$i]['post_date'],0,10),
         ];
 }
 

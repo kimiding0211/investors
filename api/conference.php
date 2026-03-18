@@ -26,6 +26,7 @@ for ($i = 0; $i < count($rs); $i++) {
             "date" => $rs[$i]['date'],
             "location" => $rs[$i]['location'],
             "link_url" => $rs[$i]['link_cn'],
+            "link_en" => $rs[$i]['link_en'],
             "link_video" => $rs[$i]['link_video'],
             ];
     }
